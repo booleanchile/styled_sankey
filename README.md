@@ -2,7 +2,7 @@
 
 This is a d3 javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
 
-### Live Code Demonstration
+### Live Code Demonstration
 
 For a full demonstration of the use of this library:
 http://kardash.net/styled_sankey/treasury.html
@@ -14,6 +14,7 @@ Additionally developed features of this branch (https://github.com/northam/style
 3. Example (at http://kardash.net/styled_sankey/treasury.html) demonstrates a light text on dark background. You can revert the colors, and use any colors of your choice.
 
 NOTE ONE: The example overlays two Sankey charts on the same html page. You are not obliged to use TWO Sankey charts as it can be considered a code duplication.
+
 NOTE TWO: for the best viewing results use either Firefox or Chrome browser.
 
 ### Overview

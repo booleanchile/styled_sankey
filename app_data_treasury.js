@@ -69,6 +69,8 @@ var diagramLinks = [
   {"source":30, "target":44, "value":1}, /* Module to Component */
   {"source":31, "target":45, "value":1}, /* Module to Component */
   {"source":32, "target":54, "value":1}, /* Module to Component */
+  {"source":32, "target":53, "value":1}, /* Module to Component */
+  {"source":32, "target":50, "value":1}, /* Module to Component */
   {"source":33, "target":48, "value":1}, /* Module to Component */
   {"source":34, "target":53, "value":1}, /* Module to Component */
   {"source":35, "target":47, "value":1}, /* Module to Component */

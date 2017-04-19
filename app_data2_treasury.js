@@ -1,6 +1,6 @@
 /* connecting a Solution to Financial Products */
 var diagramNodes2 = [
-  {"type":"Solution","id":0,"parent":null,"name":"","height":"200"}, /* Treasury */
+  {"type":"Solution","id":0,"parent":null,"name":["Treasury"],"height":"200"}, /* Treasury */
   {"type":"Financial_Product","id":7,"parent":null,"number":"175","name":["Foreign Exchange"]},
   {"type":"Financial_Product","id":8,"parent":null,"number":"178","name":["Money Market &", "Discount Papers"]},
   {"type":"Financial_Product","id":9,"parent":null,"number":"180","name":["Interest Rates", "Derivatives"]},
