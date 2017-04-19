@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calypso sankey diagram test</title>
+    <link href="style.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="chart"></div>
+    <div id="chart2"></div>
+    
+    <!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+	<!--<script src="d3/d3.min.js"></script>-->
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<!--script src="https://d3js.org/d3-scale.v1.min.js"></script-->
+    <!--<script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>-->
+    <script src="bihisankey/bihisankey.js"></script>
+    <script src="app.js"></script>
+	<script src="app_data.js"></script>
+	<script>
+	biHiSankey
+	  .nodeWidth(120)
+	  .nodes(diagramNodes)
+	  .links(diagramLinks)
+	  .initializeNodes(function (node) {
+		node.state = node.parent ? "contained" : "collapsed";
+	  })
+	  .layout(LAYOUT_INTERATIONS);
+
+	disableUserInterractions(2 * TRANSITION_DURATION);
+
+	update();
+	</script>
+	
+	
+    <script src="app2.js"></script>
+	<script src="app_data2.js"></script>
+	<script>
+	biHiSankey
+	  .nodeWidth(120)
+	  .nodes(diagramNodes2)
+	  .links(diagramLinks2)
+	  .initializeNodes(function (node) {
+		node.state = node.parent ? "contained" : "collapsed";
+	  })
+	  .layout(LAYOUT_INTERATIONS);
+
+	disableUserInterractions(2 * TRANSITION_DURATION);
+
+	update();
+	</script>
+
+  </body>
+</html>
