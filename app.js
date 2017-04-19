@@ -260,9 +260,9 @@ function update () {
     if (!isTransitioning) {
       showTooltip().select(".value").text(function () {
         if (d.direction > 0) {
-          return d.source.name + " -> " + d.target.name; /* + "\n" + formatNumber(d.value);*/
+          return d.source.name.join(" ") + " -> " + d.target.name.join(" "); /* + "\n" + formatNumber(d.value);*/
         }
-        return d.target.name + " <- " + d.source.name; /* + "\n" + formatNumber(d.value);*/
+        return d.target.name.join(" ") + " <- " + d.source.name.join(" "); /* + "\n" + formatNumber(d.value);*/
       });
 
       d3.select(this)
@@ -391,7 +391,7 @@ function update () {
           .text(function () {
             var additionalInstructions = g.children.length ? "\n(Double click to expand)" : "";
             /*return g.name + "\nNet flow: " + formatFlow(g.netFlow) + additionalInstructions;*/
-            return g.name + additionalInstructions;
+            return g.name.join(" ") + additionalInstructions;
           });
     }
   });
@@ -478,7 +478,7 @@ function update () {
     if (!isTransitioning) {
       showTooltip().select(".value")
         .text(function () {
-          return g.name + "\n(Double click to collapse)";
+          return g.name.join(" ") + "\n(Double click to collapse)";
         });
 
       var highlightColor = highlightColorScale(g.type.replace(/ .*/, ""));
