@@ -5,8 +5,14 @@ This is a d3 javascript plugin/library for generating bidirectional hierarchial 
 ### Live Code Demonstration
 
 For a a full demonstration of the use of this library:
-http://bl.ocks.org/Neilos/584b9a5d44d5fe00f779
+http://kardash.net/styled_sankey/treasury.html
 
+UPDATE: made in northam/styled_sanky repository
+New functionality of this branch derived from Neilos/bihisankey include:
+
+1. Support of centered (inside of rectacgle node) text. Default: LABEL_ALWAYS_MIDDLE = true. 
+2. Text can be 1, 2, or 3 lines. Every line is an array item of "text" data element.
+3. Example has white text on dark background, and overlays two Sankey charts on the same html page. However you are not obliged to use two Sankey charts.
 
 ### Overview
 
@@ -23,12 +29,12 @@ biHiSankey
 To (re)initialize the sankey diagram with data
 ```javascript
 var someNodes = [
-  {"type" => "A", "id" => 1, "parent" => null, "name" => "Node 1"},
-  {"type" => "A", "id" => 2, "parent" => "1", "name" => "Node 2"},
-  {"type" => "A", "id" => 3, "parent" => "1", "name" => "Node 3"},
-  {"type" => "B", "id" => 4, "parent" => null, "name" => "Node 4"},
-  {"type" => "B", "id" => 5, "parent" => "4", "name" => "Node 5"},
-  {"type" => "C", "id" => 6, "parent" => "5", "name" => "Node 6"},
+  {"type" => "A", "id" => 1, "parent" => null, "name" => ["Node 1"]},
+  {"type" => "A", "id" => 2, "parent" => "1", "name" => ["Node 2"]},
+  {"type" => "A", "id" => 3, "parent" => "1", "name" => ["Node 3"]},
+  {"type" => "B", "id" => 4, "parent" => null, "name" => ["Node 4"]},
+  {"type" => "B", "id" => 5, "parent" => "4", "name" => ["Node 5"]},
+  {"type" => "C", "id" => 6, "parent" => "5", "name" => ["Node 6"]},
 ]
 var someLinks = [
   {source: 3, target: 2, value: 20},
