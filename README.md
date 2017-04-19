@@ -1,18 +1,20 @@
 ## BiDirectional Hierarchical Sankey Diagram
 
-This is a d3 javascript plugin/library for generating bidirectional hierarchial sankey diagrams
+This is a d3 javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
 
 ### Live Code Demonstration
 
 For a a full demonstration of the use of this library:
 http://kardash.net/styled_sankey/treasury.html
 
-UPDATE: made in northam/styled_sanky repository
-New functionality of this branch derived from Neilos/bihisankey include:
+Additionally developed features of this branch (northam/styled_sanky) derived from Neilos/bihisankey include:
 
-1. Support of centered (inside of rectacgle node) text. Default: LABEL_ALWAYS_MIDDLE = true. 
+1. Support of centered (inside of rectangle node) text. Default: LABEL_ALWAYS_MIDDLE = true. 
 2. Text can be 1, 2, or 3 lines. Every line is an array item of "text" data element.
-3. Example has white text on dark background, and overlays two Sankey charts on the same html page. However you are not obliged to use two Sankey charts.
+3. Example (at http://kardash.net/styled_sankey/treasury.html) demonstrates a light text on dark background. You can revert the colors, and use any colors of your choice.
+
+NOTE ONE: The example overlays two Sankey charts on the same html page. You are not obliged to use TWO Sankey charts as it can be considered a code duplication.
+NOTE TWO: for the best viewing results use either Firefox or Chrome browsers.
 
 ### Overview
 

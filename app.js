@@ -30,8 +30,8 @@ var OPACITY = {
     LEFT: OUTER_MARGIN
   },
   TRANSITION_DURATION = 400,
-  HEIGHT = 600 - MARGIN.TOP - MARGIN.BOTTOM,
-  WIDTH = 1000 - MARGIN.LEFT - MARGIN.RIGHT,
+  HEIGHT = 1000 - MARGIN.TOP - MARGIN.BOTTOM,
+  WIDTH = 1020 - MARGIN.LEFT - MARGIN.RIGHT,
   LAYOUT_INTERATIONS = 32,
   REFRESH_INTERVAL = 7000;
 
@@ -417,7 +417,7 @@ function update () {
 	.filter(function (d) { return d.value !== 0; })
 	.select("text")
 		.attr("x", LABEL_ALWAYS_MIDDLE ? biHiSankey.nodeWidth()/2 : -6)
-		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*8); })
+		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*7); })
 		.attr("dy", ".35em")
 		.attr("text-anchor", LABEL_ALWAYS_MIDDLE ? "middle" : "end")
 		.text(function (d) { return d.name[0]; });
@@ -428,14 +428,14 @@ function update () {
   }
   node.filter(function (d) { return d.value !== 0; }).select("text").append("tspan") /* apend second line of the text */
 		.attr("x", LABEL_ALWAYS_MIDDLE ? biHiSankey.nodeWidth()/2 : -6)
-		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*8); })
+		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*7); })
 		.attr("dy", "1.5em")
 		.attr("text-anchor", LABEL_ALWAYS_MIDDLE ? "middle" : "end")
 		.text(function (d) { return d.name[1]; });
 		
   node.filter(function (d) { return d.value !== 0; }).select("text").append("tspan") /* apend third line of the text */
 		.attr("x", LABEL_ALWAYS_MIDDLE ? biHiSankey.nodeWidth()/2 : -6)
-		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*8); })
+		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*7); })
 		.attr("dy", "2.65em")
 		.attr("text-anchor", LABEL_ALWAYS_MIDDLE ? "middle" : "end")
 		.text(function (d) { return d.name[2]; });
