@@ -2,6 +2,8 @@
 
 This is a d3 javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
 
+**Known limitation: uses old D3 v.3. Not compatible with the latest D3 v.4.**
+
 ### Live Code Demonstration
 
 For a demonstration of the use of this library:
