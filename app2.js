@@ -18,6 +18,7 @@ var OPACITY = {
   OUTFLOW_COLOR2 = "#6cfff9",
   NODE_WIDTH = 40,
   LABEL_ALWAYS_MIDDLE = true,
+  ONLY_DEFAULT_TEXT_COLOR = false, /* set it to 'true' if you want only and the same text color as specified in css */
   COLLAPSER = {
     RADIUS: NODE_WIDTH / 2,
     SPACING: 2
@@ -421,11 +422,16 @@ function update () {
 		.attr("dy", ".35em")
 		.attr("text-anchor", LABEL_ALWAYS_MIDDLE ? "middle" : "end")
 		.text(function (d) { return d.name[0]; });
-  if (!LABEL_ALWAYS_MIDDLE) {
-	node.filter(function (d) { return d.x < WIDTH / 2; })
+  if (!ONLY_DEFAULT_TEXT_COLOR)
+	node.filter(function (d) { return d.value !== 0; })
+		.select("text")
+ 		.style("fill", function (d) { return colorScale(d.type.replace(/ .*/, "")); });
+  if (!LABEL_ALWAYS_MIDDLE)
+	node.filter(function (d) { return d.value !== 0; })
+		.select("text")
+		.filter(function (d) { return d.x < biHiSankey.nodeWidth() / 2; })
 		.attr("x", 6 + biHiSankey.nodeWidth())
 		.attr("text-anchor", "start");
-  }
   
   node.filter(function (d) { return d.value !== 0; }).select("text").append("tspan") /* apend second line of the text */
 		.attr("x", LABEL_ALWAYS_MIDDLE ? biHiSankey.nodeWidth()/2 : -6)

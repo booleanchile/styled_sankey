@@ -1,5 +1,5 @@
 var diagramNodes = [
-  {"type":"Solution","id":0,"parent":null,"name":["Treasury"],"height":"200"},
+  {"type":"Solution","id":0,"parent":null,"name":["Treasury"]},
   {"type":"Function","id":12,"parent":null,"number":"209","name":["Front Office"]},
   {"type":"Function","id":13,"parent":null,"number":"210","name":["Middle Office"]},
   {"type":"Function","id":14,"parent":null,"number":"215","name":["Operations"]},

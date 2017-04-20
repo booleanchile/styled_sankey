@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple dark styled Sankey with hierarchy</title>
+    <link href="simple_dark.css" rel="stylesheet">
+  </head>
+  <body>
+  Instructions: <p>
+  Double-click in the "Middle Office" box to see its children.<p>
+  Double-click in the "Trade Lifecycle" box to see its children.<p>
+    <div id="chart"></div>
+    
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="bihisankey/bihisankey.js"></script>
+    <script src="hierarchy_app.js"></script>
+	<script src="hierarchy_data.js"></script>
+	<script>
+	biHiSankey
+	  .nodeWidth(40)
+	  .nodes(diagramNodes)
+	  .links(diagramLinks)
+	  .initializeNodes(function (node) {
+		node.state = node.parent ? "contained" : "collapsed";
+	  })
+	  .layout(LAYOUT_INTERATIONS);
+
+	disableUserInterractions(2 * TRANSITION_DURATION);
+
+	update();
+	</script>
+
+	</body>
+</html>
