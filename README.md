@@ -5,16 +5,20 @@ This is a d3 javascript plugin/library for generating bidirectional hierarchial 
 ### Live Code Demonstration
 
 For a demonstration of the use of this library:
-http://kardash.net/styled_sankey/treasury.html - "Treasury" example
-http://kardash.net/styled_sankey/simple_light.html - simple example with white background and black text
-http://kardash.net/styled_sankey/simple_dark.html - simple example with dark background and white text
-http://kardash.net/styled_sankey/hierarchy.html - example with hierarchy interactions and text positioned outside of rectangle nodes
 
-Additionally developed features of this branch (https://github.com/northam/styled_sankey) forked from https://github.com/Neilos/bihisankey include:
+http://kardash.net/styled_sankey/treasury.html - "Treasury" example.
 
-1. Support of centered text inside of the rectangle nodes. Default parameter: LABEL_ALWAYS_MIDDLE = true. In case of "false" the text will be rendered outside of the nodes.
-2. Text of the node can consist of 1, 2, or 3 lines now. Every line is an array item of "text" data element.
-3. The color of the the node can be default color (specified in css), the same for all nodes, or individual colors depending on node type. Use parameter: ONLY_DEFAULT_TEXT_COLOR = false|true.
+http://kardash.net/styled_sankey/simple_light.html - simple example with white background and black text.
+
+http://kardash.net/styled_sankey/simple_dark.html - simple example with dark background and white text.
+
+http://kardash.net/styled_sankey/hierarchy.html - example with hierarchy interactions and text positioned outside of rectangle nodes.
+
+Additionally developed features in this branch (https://github.com/northam/styled_sankey) forked from https://github.com/Neilos/bihisankey include:
+
+1. Support of **centered text inside of the rectangle** nodes. Default parameter: **LABEL_ALWAYS_MIDDLE** = true. In case of "false" the text will be rendered outside of the nodes.
+2. Text of the node can consist of **1, 2, or 3 lines** now. Every line is an array item of "text" data element.
+3. The color of the the node can be default color (specified in css), the same for all nodes, or individual colors depending on node type. Use parameter: **ONLY_DEFAULT_TEXT_COLOR** = false|true.
 4. Example (at http://kardash.net/styled_sankey/treasury.html) demonstrates a light text on dark background. You can revert the colors, or use any colors of your choice. See other examples.
 
 NOTE: The "Treasury" example overlays two Sankey charts on the same html page. You are not obliged to use TWO Sankey charts as it can be considered a code duplication.
