@@ -16,12 +16,15 @@ http://kardash.net/styled_sankey/simple_dark.html - simple example with dark bac
 
 http://kardash.net/styled_sankey/hierarchy.html - example with hierarchy interactions and text positioned outside of rectangle nodes.
 
+http://kardash.net/styled_sankey/test.html - the links in the same direction between the same target and source will NOT be merged.
+
 Additionally developed features in this branch (https://github.com/northam/styled_sankey) forked from https://github.com/Neilos/bihisankey include:
 
 1. Support of **centered text inside of the rectangle** nodes. Default parameter: **LABEL_ALWAYS_MIDDLE** = true. In case of "false" the text will be rendered outside of the nodes.
 2. Text of the node can consist of **1, 2, or 3 lines** now. Every line is an array item of "text" data element.
 3. The color of the the node can be default color (specified in css), the same for all nodes, or individual colors depending on node type. Use parameter: **ONLY_DEFAULT_TEXT_COLOR** = false|true.
 4. Example (at http://kardash.net/styled_sankey/treasury.html) demonstrates a light text on dark background. You can revert the colors, or use any colors of your choice. See other examples.
+5. The links in the same direction between the same target and source may or may NOT be merged. Use function: mergeSameNodesLinks(false). Default is true.
 
 NOTE: The "Treasury" example overlays two Sankey charts on the same html page. You are not obliged to use TWO Sankey charts as it can be considered a code duplication.
 

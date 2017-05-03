@@ -14,7 +14,9 @@ d3.biHiSankey = function () {
     links = [],
     xScaleFactor = 1,
     yScaleFactor = 1,
-    defaultLinkCurvature = 0.5;
+    defaultLinkCurvature = 0.5,
+    mergeSameNodesLinks = true, // default will merge the links in the same direction between the same target and source
+    linkIdIncrement = 0;
 
   function center(node) {
     return node.y + node.height / 2;
@@ -91,7 +93,7 @@ d3.biHiSankey = function () {
     links.forEach(function (link) {
       sourceNode = nodeMap[link.source] || link.source;
       targetNode = nodeMap[link.target] || link.target;
-      link.id = link.source + '-' + link.target;
+      link.id = link.source + '-' + link.target + (mergeSameNodesLinks?'':linkIdIncrement++);
       link.source = sourceNode;
       link.target = targetNode;
       sourceNode.sourceLinks.push(link);
@@ -179,6 +181,7 @@ d3.biHiSankey = function () {
   // same source to the same target by creating a new link
   // with a value equal to the sum of the values of the merged links
   function mergeLinks() {
+    if (!mergeSameNodesLinks) return;
     var linkGroups = d3.nest()
       .key(function (link) { return link.source.id + "->" + link.target.id; })
       .entries(links)
@@ -341,7 +344,7 @@ d3.biHiSankey = function () {
           .sortKeys(d3.ascending)
           .entries(nodes)
           .map(function (object) { return object.values; });
-
+      
     function calculateYScaleFactor() {
       var linkSpacesCount, nodeValueSum, discretionaryY;
       yScaleFactor = d3.min(nodesByXPosition, function (nodes) {
@@ -661,6 +664,12 @@ d3.biHiSankey = function () {
     return biHiSankey;
   };
 
+  biHiSankey.mergeSameNodesLinks = function (_) {
+    if (!arguments.length) { return mergeSameNodesLinks; }
+    mergeSameNodesLinks = _;
+    return biHiSankey;
+  };
+    
   biHiSankey.visibleLinks = function () {
     return visible(links);
   };
