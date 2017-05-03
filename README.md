@@ -91,6 +91,7 @@ biHiSankey.nodes();
 biHiSankey.nodeWidth();
 biHiSankey.nodeSpacing();
 biHiSankey.size();
+biHiSankey.mergeSameNodesLinks();
 ```
 
 ### License
