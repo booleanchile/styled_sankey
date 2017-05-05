@@ -56,12 +56,9 @@
         .labelsAlwaysMiddle(true)
         .nodes(diagramNodes2)
         .links(diagramLinks2)
-        .initializeNodes(function (node) {
-            node.state = node.parent ? "contained" : "collapsed";
-        })
+        .initializeNodes(function (node) { node.state = "collapsed"; })
         .layout(LAYOUT_INTERATIONS);
 
-    disableUserInteractions(2 * TRANSITION_DURATION);
     update();
 
     </script>
