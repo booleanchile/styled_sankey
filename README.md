@@ -2,13 +2,13 @@
 
 This is a d3 javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
 
-**Known limitations: **
+**Known limitations:**
 
 Diagram uses old D3 v.3. Not compatible with the latest D3 v.4.
 
 Collapser circle size, and top padding of svg don't change even you define different nodeWidth().
 
-Node types, node colors, flow (in and out) colors are not parametrized. You can change/add/remove them in bihisankey.bihisankey.app.js.
+Node types, node colors, flow (in and out) colors are not parametrized. You can change/add/remove them in bihisankey.app.js.
 
 ### Live Code Demonstration
 
@@ -75,16 +75,11 @@ biHiSankey
   })
 ```
 
-To (re)calculate the attributes of all nodes and links:
-```javascript
-biHiSankey.layout(20); // pass in a maximum number of iterations
-```
-
 **Functions**
 ```javascript
 biHiSankey.relayout(); // (re)calculate link paths and node heights but do not change the node positions
 biHiSankey.initializeNodes();
-biHiSankey.layout();
+biHiSankey.layout(20); // (re)calculate the attributes of all nodes and links. Input param is maximum number of iterations
 ```
 
 **Bihisnakey App Functions**
