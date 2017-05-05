@@ -15,24 +15,22 @@ var OPACITY = {
   TYPE_HIGHLIGHT_COLORS = ["#ffd644", "#6cfff9", "#30ff2c", "#ee74ff", "#ccff43", "#ff7d63"],
   LINK_COLOR = "#ede2bb",
   INFLOW_COLOR = "#ffd644",
-  OUTFLOW_COLOR = "#ffd644",
-  NODE_WIDTH = 40,
-  LABEL_ALWAYS_MIDDLE = true,
-  ONLY_DEFAULT_TEXT_COLOR = true, /* set it to 'true' if you want only and the same text color as specified in css */
+  OUTFLOW_COLOR = "#6cfff9",
+  NODE_WIDTH = 20,
   COLLAPSER = {
-    RADIUS: NODE_WIDTH / 2,
+    RADIUS: NODE_WIDTH,
     SPACING: 2
   },
-  OUTER_MARGIN = 20,
+  OUTER_MARGIN = 10,
   MARGIN = {
-    TOP: 10, /*2 * (COLLAPSER.RADIUS + OUTER_MARGIN),*/
+    TOP: 2 * COLLAPSER.RADIUS + OUTER_MARGIN,
     RIGHT: OUTER_MARGIN,
     BOTTOM: OUTER_MARGIN,
     LEFT: OUTER_MARGIN
   },
   TRANSITION_DURATION = 400,
+  WIDTH = 1300 - MARGIN.LEFT - MARGIN.RIGHT,
   HEIGHT = 1000 - MARGIN.TOP - MARGIN.BOTTOM,
-  WIDTH = 1020 - MARGIN.LEFT - MARGIN.RIGHT,
   LAYOUT_INTERATIONS = 32,
   REFRESH_INTERVAL = 7000;
 
@@ -46,8 +44,8 @@ formatFlow = function (d) {
   return "$" + flowFormat(Math.abs(d)) + (d < 0 ? " CR" : " DR");
 },
 
-// Used when temporarily disabling user interractions to allow animations to complete
-disableUserInterractions = function (time) {
+// Used when temporarily disabling user interactions to allow animations to complete
+disableUserInteractions = function (time) {
   isTransitioning = true;
   setTimeout(function(){
     isTransitioning = false;
@@ -69,10 +67,17 @@ showTooltip = function () {
       .style("opacity", 1);
 };
 
+/** The parent DOM element id of D3 chart should be specified in html.
+ * Let's check it for integrity.
+ * Default value is "#chart".
+ * */
+if (typeof chartDomElementId  === 'undefined') var chartDomElementId = "#chart"; // will make it optional
+if (!chartDomElementId) chartDomElementId = "#chart";
+
 colorScale = d3.scale.ordinal().domain(TYPES).range(TYPE_COLORS),
 highlightColorScale = d3.scale.ordinal().domain(TYPES).range(TYPE_HIGHLIGHT_COLORS),
 
-svg = d3.select("#chart").append("svg")
+svg = d3.select(chartDomElementId).append("svg")
         .attr("width", WIDTH + MARGIN.LEFT + MARGIN.RIGHT)
         .attr("height", HEIGHT + MARGIN.TOP + MARGIN.BOTTOM)
       .append("g")
@@ -82,21 +87,26 @@ svg.append("g").attr("id", "links");
 svg.append("g").attr("id", "nodes");
 svg.append("g").attr("id", "collapsers");
 
-tooltip = d3.select("#chart").append("div").attr("id", "tooltip");
+tooltip = d3.select(chartDomElementId).append("div").attr("id", "tooltip");
 
 tooltip.style("opacity", 0)
     .append("p")
       .attr("class", "value");
 
+/** New D3 diagram object */
 biHiSankey = d3.biHiSankey();
 
-// Set the biHiSankey diagram properties
+/** biHiSankey default properties
+ *  Set as many defaults as possible to avoid error for the missing property in further declarations in html file
+ */
 biHiSankey
   .nodeWidth(NODE_WIDTH)
   .nodeSpacing(10)
   .linkSpacing(4)
   .arrowheadScaleFactor(0.5) // Specifies that 0.5 of the link's stroke WIDTH should be allowed for the marker at the end of the link.
-  .size([WIDTH, HEIGHT]);
+  .size([WIDTH, HEIGHT])
+  .onlyOneTextColor(false)  // 'true' will render single only AND the same text color as specified in css
+  .labelsAlwaysMiddle(false); // 'true' will align node's text in the middle. 'false' will align left and right
 
 path = biHiSankey.link().curvature(0.45);
 
@@ -203,7 +213,7 @@ function update () {
   }
 
   function showHideChildren(node) {
-    disableUserInterractions(2 * TRANSITION_DURATION);
+    disableUserInteractions(2 * TRANSITION_DURATION);
     hideTooltip();
     if (node.state === "collapsed") { expand(node); }
     else { collapse(node); }
@@ -417,34 +427,34 @@ function update () {
   node
 	.filter(function (d) { return d.value !== 0; })
 	.select("text")
-		.attr("x", LABEL_ALWAYS_MIDDLE ? biHiSankey.nodeWidth()/2 : -6)
+		.attr("x", biHiSankey.labelsAlwaysMiddle() ? biHiSankey.nodeWidth()/2 : -6)
 		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*7); })
 		.attr("dy", ".35em")
-		.attr("text-anchor", LABEL_ALWAYS_MIDDLE ? "middle" : "end")
+		.attr("text-anchor", biHiSankey.labelsAlwaysMiddle() ? "middle" : "end")
 		.text(function (d) { return d.name[0]; });
-  if (!ONLY_DEFAULT_TEXT_COLOR)
+  if (!biHiSankey.onlyOneTextColor())
 	node.filter(function (d) { return d.value !== 0; })
 		.select("text")
  		.style("fill", function (d) { return colorScale(d.type.replace(/ .*/, "")); });
-  if (!LABEL_ALWAYS_MIDDLE)
+  if (!biHiSankey.labelsAlwaysMiddle())
 	node.filter(function (d) { return d.value !== 0; })
 		.select("text")
 		.filter(function (d) { return d.x < biHiSankey.nodeWidth() / 2; })
 		.attr("x", 6 + biHiSankey.nodeWidth())
 		.attr("text-anchor", "start");
   
-  node.filter(function (d) { return d.value !== 0; }).select("text").append("tspan") /* apend second line of the text */
-		.attr("x", LABEL_ALWAYS_MIDDLE ? biHiSankey.nodeWidth()/2 : -6)
+  node.filter(function (d) { return d.value !== 0; }).select("text").append("tspan") /* append second line of the text */
+		.attr("x", biHiSankey.labelsAlwaysMiddle() ? biHiSankey.nodeWidth()/2 : -6)
 		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*7); })
 		.attr("dy", "1.5em")
-		.attr("text-anchor", LABEL_ALWAYS_MIDDLE ? "middle" : "end")
+		.attr("text-anchor", biHiSankey.labelsAlwaysMiddle() ? "middle" : "end")
 		.text(function (d) { return d.name[1]; });
 		
-  node.filter(function (d) { return d.value !== 0; }).select("text").append("tspan") /* apend third line of the text */
-		.attr("x", LABEL_ALWAYS_MIDDLE ? biHiSankey.nodeWidth()/2 : -6)
+  node.filter(function (d) { return d.value !== 0; }).select("text").append("tspan") /* append third line of the text */
+		.attr("x", biHiSankey.labelsAlwaysMiddle() ? biHiSankey.nodeWidth()/2 : -6)
 		.attr("y", function (d) { return d.height / 2 - ((d.name.length-1)*7); })
 		.attr("dy", "2.65em")
-		.attr("text-anchor", LABEL_ALWAYS_MIDDLE ? "middle" : "end")
+		.attr("text-anchor", biHiSankey.labelsAlwaysMiddle() ? "middle" : "end")
 		.text(function (d) { return d.name[2]; });
 
   collapser = svg.select("#collapsers").selectAll(".collapser")
@@ -485,7 +495,7 @@ function update () {
     if (!isTransitioning) {
       showTooltip().select(".value")
         .text(function () {
-          return g.name.join(" ") + "\n(Double click to collapse)";
+          return g.name.join(" ") + "\n(Double click to collapse its children)";
         });
 
       var highlightColor = highlightColorScale(g.type.replace(/ .*/, ""));

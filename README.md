@@ -2,33 +2,37 @@
 
 This is a d3 javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
 
-**Known limitation: uses old D3 v.3. Not compatible with the latest D3 v.4.**
+**Known limitations: **
+
+Diagram uses old D3 v.3. Not compatible with the latest D3 v.4.
+
+Collapser circle size, and top padding of svg don't change even you define different nodeWidth().
+
+Node types, node colors, flow (in and out) colors are not parametrized. You can change/add/remove them in bihisankey.bihisankey.app.js.
 
 ### Live Code Demonstration
 
 For a demonstration of the use of this library:
 
-http://kardash.net/styled_sankey/treasury.html - "Treasury" example.
+http://kardash.net/styled_sankey/examples/simple_light.html - simple example with white background and black text.
 
-http://kardash.net/styled_sankey/simple_light.html - simple example with white background and black text.
+http://kardash.net/styled_sankey/examples/simple_dark.html - simple example with dark background and white text.
 
-http://kardash.net/styled_sankey/simple_dark.html - simple example with dark background and white text.
+http://kardash.net/styled_sankey/examples/hierarchy.html - example with hierarchy interactions and text positioned outside of rectangle nodes.
 
-http://kardash.net/styled_sankey/hierarchy.html - example with hierarchy interactions and text positioned outside of rectangle nodes.
+http://kardash.net/styled_sankey/examples/simple_test.html - the links in the same direction between the same target and source will NOT be merged.
 
-http://kardash.net/styled_sankey/test.html - the links in the same direction between the same target and source will NOT be merged.
+http://kardash.net/styled_sankey/examples/treasury.html - example with two charts overlapping each other.
 
 Additionally developed features in this branch (https://github.com/northam/styled_sankey) forked from https://github.com/Neilos/bihisankey include:
 
-1. Support of **centered text inside of the rectangle** nodes. Default parameter: **LABEL_ALWAYS_MIDDLE** = true. In case of "false" the text will be rendered outside of the nodes.
-2. Text of the node can consist of **1, 2, or 3 lines** now. Every line is an array item of "text" data element.
-3. The color of the the node can be default color (specified in css), the same for all nodes, or individual colors depending on node type. Use parameter: **ONLY_DEFAULT_TEXT_COLOR** = false|true.
-4. Example (at http://kardash.net/styled_sankey/treasury.html) demonstrates a light text on dark background. You can revert the colors, or use any colors of your choice. See other examples.
-5. The links in the same direction between the same target and source may or may NOT be merged. Use function: mergeSameNodesLinks(false). Default is true.
+1. Support of **centered text** over the nodes. Default parameter: **labelsAlwaysMiddle(true)**. In case of "false" the text will be rendered outside of the nodes.
+2. Text of the node can consist of **1, 2, or 3 lines** now. Every line is an array element of "name" array. Name of the node must by specified as an array.
+3. The color of the the node can be one default color (set in css), the same for all nodes, or individual colors depending on node type. Use parameter: **onlyOneTextColor(false|true)**.
+4. The links in the same direction between the same target and source may or may NOT be merged. Use function: mergeSameNodesLinks(false). Default is true.
+5. Most examples demonstrate a light text on dark background. You can revert the colors, or use any colors of your choice.
 
-NOTE: The "Treasury" example overlays two Sankey charts on the same html page. You are not obliged to use TWO Sankey charts as it can be considered a code duplication.
-
-NOTE TWO: for the best viewing results use either Firefox or Chrome browser.
+NOTE: for the best viewing results use either Firefox or Chrome browser.
 
 ### Overview
 
@@ -76,12 +80,20 @@ To (re)calculate the attributes of all nodes and links:
 biHiSankey.layout(20); // pass in a maximum number of iterations
 ```
 
-To (re)calculate link paths and node heights but do not change the node positions:
+**Functions**
 ```javascript
-biHiSankey.relayout();
-
+biHiSankey.relayout(); // (re)calculate link paths and node heights but do not change the node positions
+biHiSankey.initializeNodes();
+biHiSankey.layout();
 ```
 
+**Bihisnakey App Functions**
+```javascript
+disableUserInteractions();
+update();
+```
+
+**Properties**
 To return any of the previously set properties:
 ```javascript
 biHiSankey.links();
@@ -91,6 +103,8 @@ biHiSankey.nodes();
 biHiSankey.nodeWidth();
 biHiSankey.nodeSpacing();
 biHiSankey.size();
+biHiSankey.onlyOneTextColor();
+biHiSankey.labelsAlwaysMiddle();
 biHiSankey.mergeSameNodesLinks();
 ```
 

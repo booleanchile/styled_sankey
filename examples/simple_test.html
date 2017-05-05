@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Split links in styled Sankey</title>
+    <link href="simple_dark.css" rel="stylesheet">
+</head>
+<body>
+    Demonstration of <span style="font-weight:800">mergeSameNodesLinks(false)</span><p>
+    i.e. the links in the same direction between the same target and source will NOT be merged.<p>
+    <div id="chart"></div>
+
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="../bihisankey.js"></script>
+    <script>var chartDomElementId = "#chart";</script>
+    <script src="../bihisankey.app.js"></script>
+    <script src="simple_test_data.js"></script>
+    <script>
+    biHiSankey
+        .nodeWidth(70)
+        .size([600, 200])
+        .onlyOneTextColor(false)
+        .labelsAlwaysMiddle(true)
+        .mergeSameNodesLinks(false)
+        .nodes(diagramNodes)
+        .links(diagramLinks)
+        .initializeNodes(function (node) {
+            node.state = node.parent ? "contained" : "collapsed";
+        })
+        .layout(LAYOUT_INTERATIONS);
+
+    disableUserInteractions(2 * TRANSITION_DURATION);
+    update();
+
+    </script>
+</body>
+</html>
