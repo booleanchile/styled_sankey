@@ -2,13 +2,25 @@
 
 This is a d3 javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
 
-**Known limitations:**
+**Known limitations**
 
 Diagram uses old D3 v.3. Not compatible with the latest D3 v.4.
 
 Collapser circle size, and top padding of svg don't change even you define different nodeWidth().
 
 Node types, node colors, flow (in and out) colors are not parametrized. You can change/add/remove them in bihisankey.app.js.
+
+**Changes and improvements to accomodate custom styling**
+
+Additionally developed features in this branch (https://github.com/northam/styled_sankey) forked from https://github.com/Neilos/bihisankey include:
+
+1. Support of **centered text** over the nodes. Default parameter: **labelsAlwaysMiddle(true)**. In case of "false" the text will be rendered outside of the nodes.
+2. Text of the node can consist of **1, 2, or 3 lines** now. Every line is an array element of "name" array. Name of the node must by specified as an array.
+3. The color of the the node can be one default color (set in css), the same for all nodes, or individual colors depending on node type. Use parameter: **onlyOneTextColor(false|true)**.
+4. The links in the same direction between the same target and source can be merged or not merger. Use function: **mergeSameNodesLinks(false)**. Default is **true**.
+5. Most examples demonstrate a light text on dark background. You can revert the colors, or use any colors of your choice.
+
+NOTE: for the best viewing results use either Firefox or Chrome browser.
 
 ### Live Code Demonstration
 
@@ -23,16 +35,6 @@ http://kardash.net/styled_sankey/examples/hierarchy.html - example with hierarch
 http://kardash.net/styled_sankey/examples/simple_test.html - the links in the same direction between the same target and source will NOT be merged.
 
 http://kardash.net/styled_sankey/examples/treasury.html - example with two charts overlapping each other.
-
-Additionally developed features in this branch (https://github.com/northam/styled_sankey) forked from https://github.com/Neilos/bihisankey include:
-
-1. Support of **centered text** over the nodes. Default parameter: **labelsAlwaysMiddle(true)**. In case of "false" the text will be rendered outside of the nodes.
-2. Text of the node can consist of **1, 2, or 3 lines** now. Every line is an array element of "name" array. Name of the node must by specified as an array.
-3. The color of the the node can be one default color (set in css), the same for all nodes, or individual colors depending on node type. Use parameter: **onlyOneTextColor(false|true)**.
-4. The links in the same direction between the same target and source may or may NOT be merged. Use function: mergeSameNodesLinks(false). Default is true.
-5. Most examples demonstrate a light text on dark background. You can revert the colors, or use any colors of your choice.
-
-NOTE: for the best viewing results use either Firefox or Chrome browser.
 
 ### Overview
 
@@ -89,6 +91,7 @@ update();
 ```
 
 **Properties**
+
 To return any of the previously set properties:
 ```javascript
 biHiSankey.links();
@@ -98,9 +101,9 @@ biHiSankey.nodes();
 biHiSankey.nodeWidth();
 biHiSankey.nodeSpacing();
 biHiSankey.size();
-biHiSankey.onlyOneTextColor();
-biHiSankey.labelsAlwaysMiddle();
-biHiSankey.mergeSameNodesLinks();
+biHiSankey.onlyOneTextColor(); // 'true' will render single only AND the same text color as specified in css
+biHiSankey.labelsAlwaysMiddle(); // 'true' will align node's text in the middle. 'false' will align left and right
+biHiSankey.mergeSameNodesLinks();  // 'true' will merge the links in the same direction between the same target and source
 ```
 
 ### License
