@@ -1,6 +1,6 @@
 ## BiDirectional Hierarchical (Styled) Sankey Diagram
 
-This is a d3 javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
+This is a D3.js javascript plugin/library for generating bidirectional hierarchial Sankey diagrams
 
 **Known limitations**
 
